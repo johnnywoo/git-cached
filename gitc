@@ -74,7 +74,7 @@ function __gitc_initialize() {
 
   # Create cache directory for the domain and initialize if it doesn't exist.
   if [[ ! -d  $cdir ]]; then
-    mkdir $cdir && cd $cdir
+    mkdir -p $cdir && cd $cdir
     $GITC_ORIGINAL_GIT init --bare
     # Object store should never be pruned.
     $GITC_ORIGINAL_GIT config --add gc.pruneexpire never
