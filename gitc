@@ -41,7 +41,7 @@ function __gitc_initialize() {
     esac; shift
   done
 
-  set - $args
+  set -- $args
 
   #                                      1 addr - full address
   #                                      | 2 prot - protocol, e.g. http://, git://, etc...
@@ -159,7 +159,7 @@ function _gitc_pull() {
 }
 
 function _gitc_clone() {
-  set - `__gitc_filter_args "$@"`
+  set -- `__gitc_filter_args "$@"`
   __gitc_initialize "$@"
 
   # Add tracking info.
@@ -175,7 +175,7 @@ function _gitc_clone() {
 function _gitc_cache_attach() {
   [[ -n `__gitc_is_cached` ]] && echo "Already attached." && exit
 
-  set - `__gitc_filter_args "$@"`
+  set -- `__gitc_filter_args "$@"`
   __gitc_initialize `$GITC_ORIGINAL_GIT config --get remote.origin.url` "$@"
 
   $GITC_ORIGINAL_GIT config --replace-all git-cached.project $__GITC_PROJECT
