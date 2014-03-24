@@ -68,6 +68,12 @@ function __gitc_initialize() {
     __GITC_DOMAIN=$doma
     __GITC_CACHE_DIR=$GIT_CACHE_DIR/$grou
     cdir=$__GITC_CACHE_DIR
+  elif [[ "$1" == clone ]]; then
+    # we could not parse the repo location, which most likely means it is a local clone
+    # e.g. git clone ../some-repo clone-path
+    # in this case we just clone it with plain git
+    $GITC_ORIGINAL_GIT "$@"
+    exit $?
   else
     echo "Could not determine the url for the repository." && exit
   fi
